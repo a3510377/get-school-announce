@@ -1,4 +1,4 @@
-name: deploy
+name: check
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     - cron: "*/5 * * * *"
 
 jobs:
-  deploy:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
 
-      - name: deploy
+      - name: update tmp
         run: |
           cd dist
           git config --global user.name "$user_name"
