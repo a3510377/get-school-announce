@@ -31,8 +31,11 @@ jobs:
           git config --global user.email "$user_email"
           git init
           git add catch-news.json -f
-          git commit -m "post new"
-          git push -f https://_:"$token"@github.com/a3510377/get-school-announce.git
+          if [[ `git status --porcelain` ]]; then
+            git commit -m "post new"
+            git status --porcelain
+            git push -f https://_:"$token"@github.com/a3510377/get-school-announce.git
+          fi
         shell: bash
         env:
           token: ${{ secrets.GITHUB_TOKEN }}
