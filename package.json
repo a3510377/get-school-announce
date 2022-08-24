@@ -1,0 +1,24 @@
+{
+  "name": "get-school-announce",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "猴子 <a102009102009@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node -r dotenv/config src",
+    "github": "ts-node src/github.ts"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "happy-dom": "^6.0.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.11",
+    "@typescript-eslint/eslint-plugin": "^5.34.0",
+    "@typescript-eslint/parser": "^5.34.0",
+    "eslint": "^8.22.0"
+  }
+}
