@@ -37,6 +37,8 @@ export const getSchoolLatestNew = async () => {
     // eslint-disable-next-line no-empty
   } catch {}
 
+  if (!fs.existsSync("/catch")) fs.mkdirSync("/catch", { recursive: true });
+
   fs.writeFileSync(
     "catch/catch-news.json",
     JSON.stringify(news.map((_) => _.href)),
