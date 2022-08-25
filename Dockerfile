@@ -12,6 +12,6 @@ COPY --from=builder /node_modules/ /app/node_modules/
 COPY ./src ./src
 COPY --from=builder /package.json ./package.json
 
-VOLUME /catch /app/catch
+VOLUME /app/catch
 
 CMD yarn run start
