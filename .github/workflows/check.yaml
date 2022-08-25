@@ -28,7 +28,7 @@ jobs:
           git config --global user.name "$user_name"
           git config --global user.email "$user_email"
           git init
-          git add catch-news.json -f
+          git add catch/catch-news.json -f
           if [[ `git status --porcelain` ]]; then
             git commit -m "post new"
             git push -f https://_:"$token"@github.com/a3510377/get-school-announce.git
