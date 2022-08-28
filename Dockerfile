@@ -1,17 +1,28 @@
-FROM node:16-alpine AS builder
+FROM node:16-alpine AS base
+
+FROM base as node_modules
 
 COPY ["./package.json", "./yarn.lock", "./"]
 
-RUN yarn --production --silent
+RUN yarn --prod --silent
 
-# app
-FROM node:16-alpine
+FROM base as builder
+WORKDIR /build
 
-WORKDIR /app
-COPY --from=builder /node_modules/ /app/node_modules/
+COPY --from=node_modules /node_modules/ ./node_modules/
+COPY --from=node_modules /package.json .
+COPY --from=node_modules /yarn.lock .
+COPY ./tsconfig.json .
 COPY ./src ./src
-COPY --from=builder /package.json ./package.json
 
-VOLUME /app/catch
+RUN yarn install --silent
+RUN yarn run build
 
-CMD yarn run start
+FROM base
+WORKDIR /app
+
+COPY --from=node_modules /node_modules/ ./node_modules/
+COPY --from=node_modules /package.json ./package.json
+COPY --from=builder /build/dist/ ./dist/
+
+CMD node dist

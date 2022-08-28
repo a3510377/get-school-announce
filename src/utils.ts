@@ -2,11 +2,15 @@ import axios from "axios";
 import { Window } from "happy-dom";
 import { getSchoolLatestNew, PmaiSchoolNewData } from "./getSchoolLatestNews";
 
+process
+  .on("uncaughtException", (er: Error) => console.error(er.toString()))
+  .on("unhandledRejection", (er: Error) => console.error(er.toString()));
+
 export const getDom = async (url: string) => {
   const window = new Window();
   const document = window.document;
 
-  const { data } = await axios.get(url);
+  const { data } = await axios.get(url).catch();
 
   const noscriptEl = document.createElement("noscript");
   noscriptEl.innerHTML = data;
